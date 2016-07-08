@@ -1,7 +1,6 @@
 package com.jackpocket.spinwheelview;
 
 import android.view.animation.DecelerateInterpolator;
-import android.view.animation.Interpolator;
 
 public class SpinnerTask implements Runnable {
 
@@ -23,7 +22,7 @@ public class SpinnerTask implements Runnable {
     private float duration = 4950;
     private float percentCompleted = 0;
 
-    private Interpolator interpolator = new DecelerateInterpolator();
+    private DecelerateInterpolator interpolator = new DecelerateInterpolator();
 
     public SpinnerTask(float startingRotationDegrees, float targetRotationDegrees, float force, SpinTaskCallbacks callbacks){
         this.startingRotation = startingRotationDegrees % 360;
