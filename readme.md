@@ -1,5 +1,7 @@
 A simple library to create a spinning wheel View that allows you to spin smoothly to a specific angle.
 
+![SpinWheelView Sample](https://github.com/jackpocket/android_spinwheelview/raw/master/spinwheelview.gif)
+
 ## Installation
 
 ```
