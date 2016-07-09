@@ -8,7 +8,7 @@ A simple library to create a spinning wheel View that allows you to spin smoothl
     }
 
     dependencies {
-        compile('com.jackpocket:spinwheelview:1.0.0')
+        compile('com.jackpocket:spinwheelview:1.0.1')
     }
 ```
 
@@ -30,7 +30,18 @@ The spin methods are pretty self-explanatory:
     spinTo(float targetDegrees, float force)
     spinTo(float targetDegrees, float force, boolean clockwise)
 
-#### TODO:
-* Follow touch
-* Swipe-to-spin
+### Flick to Spin
+
+With v1.0.1, the SpinWheelView can now be dragged and flung to land on whatever your desired target degrees is. 
+
+To enable touch/drag/fling, you need to call *setSpinWithTouchEnabled(true)* on your SpinWheelView instance.
+
+To set the target degrees on fling, you can preemptively call *setTargetDegreesOnFling(float)* or register a callback that can be run when the fling occurs to manually set it then. e.g.
+
+    final SpinWheelView view = ((SpinWheelView) findViewById(R.id.spin_wheel_view))
+            .setSpinWithTouchEnabled(true)
+            .setTargetDegreesOnFling(45);
+
+    view.setPreFlingCallback(() ->
+            view.setTargetDegreesOnFling(new Random().nextInt(360));
 
