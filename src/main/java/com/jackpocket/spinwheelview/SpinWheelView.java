@@ -160,6 +160,14 @@ public class SpinWheelView extends ImageView implements SpinnerTask.SpinTaskCall
         lastTouchPos = currentTouchPos;
         currentTouchPos = new float[]{ event.getRawX(), event.getRawY() };
 
+        double totalDistance = Math.sqrt(Math.pow(currentTouchPos[0] - startingTouchPos[0], 2) +
+                Math.pow(currentTouchPos[1] - startingTouchPos[1], 2));
+
+        if(totalDistance < flingMaxDistance * 2){
+            adjustAngleOnTouch();
+            return;
+        }
+
         double distance = Math.sqrt(Math.pow(currentTouchPos[0] - lastTouchPos[0], 2) +
                 Math.pow(currentTouchPos[1] - lastTouchPos[1], 2));
 
@@ -168,14 +176,12 @@ public class SpinWheelView extends ImageView implements SpinnerTask.SpinTaskCall
         float mX = currentTouchPos[0] - startingTouchPos[0];
         float mY = currentTouchPos[1] - startingTouchPos[1];
 
-        // Pretty sure this isn't working correctly because of the flipped y-axis
-        // but going to have to wait until next week to find out
         boolean isLeft = calculateCrossProduct(currentTouchPos, startingTouchPos, viewCenterPos) < 0;
 
         boolean clockwise;
 
         if(isLeft)
-            clockwise = !((0 < mX && mY < 0) || (mX < 0 && mY < 0));
+            clockwise = !((mX < 0 && mY < 0) || (0 < mX && mY < 0));
         else clockwise = !((mX < 0 && 0 < mY) || (0 < mX && 0 < mY));
 
         if(preFlingCallback != null)
@@ -185,6 +191,12 @@ public class SpinWheelView extends ImageView implements SpinnerTask.SpinTaskCall
     }
 
     public float calculateCrossProduct(float[] a, float[] b, int[] center){
+        if(a[1] < b[1]){
+            float[] temp = a;
+            a = b;
+            b = temp;
+        }
+
         return (((b[0] - a[0]) * (center[1] - a[1])) - ((b[1] - a[1]) * (center[0] - a[0])));
     }
 

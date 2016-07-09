@@ -48,7 +48,7 @@ ext {
     artifact = 'spinwheelview'
 
     libraryDescription = 'A spinning wheel View'
-    libraryVersion = '1.0.0'
+    libraryVersion = '1.0.1'
 
     developerId = 'jackpocket'
     developerName = 'Jackpocket'
